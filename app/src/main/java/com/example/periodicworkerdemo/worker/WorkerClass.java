@@ -31,10 +31,26 @@ public class WorkerClass extends Worker {
     public Result doWork() {
 
         Log.e("doWork","Worker");
+        /*This is how you can get assigned values*/
+        //getting the values and assignment
+        int mInt = getInputData().getInt("INTEGER", 0);
+        String mName = getInputData().getString("STRING");
+
+        Log.e("Integer Val","Worker" + mInt);
+        Log.e("String Val","Worker" + mName);
+
         //do your work here
         createNotificationChannel();
 
-        return Result.success();
+        /*you can also check kepp the worker alive until you get desired result as follows*/
+        if (mInt != 0) {
+            return Result.success();
+        } else {
+            return Result.retry();
+        }
+
+        /*This returns Result as success*/
+        //return Result.success();
     }
 
     private void createNotificationChannel() {
